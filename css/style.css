@@ -1,0 +1,338 @@
+/* ═══════════════════════════════════════════════
+   Expense & Budget Visualizer — style.css
+   ═══════════════════════════════════════════════ */
+
+/* ── Reset & base ───────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --clr-bg:        #f0f4f8;
+  --clr-surface:   #ffffff;
+  --clr-primary:   #4f46e5;
+  --clr-primary-h: #4338ca;
+  --clr-danger:    #ef4444;
+  --clr-danger-h:  #dc2626;
+  --clr-text:      #1e293b;
+  --clr-muted:     #64748b;
+  --clr-border:    #e2e8f0;
+
+  /* category accent colours (also used by chart) */
+  --clr-food:      #f97316;
+  --clr-transport: #3b82f6;
+  --clr-fun:       #a855f7;
+
+  --radius:        12px;
+  --shadow:        0 2px 12px rgba(0,0,0,.08);
+  --transition:    0.2s ease;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* ── App wrapper ────────────────────────────── */
+.app-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+/* ── Header ─────────────────────────────────── */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.app-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--clr-primary);
+  letter-spacing: -0.5px;
+}
+
+.balance-card {
+  background: var(--clr-primary);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 14px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: var(--shadow);
+  min-width: 180px;
+}
+
+.balance-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.85;
+}
+
+.balance-amount {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin-top: 2px;
+}
+
+/* ── Main layout ────────────────────────────── */
+.app-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .app-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Cards ──────────────────────────────────── */
+.card {
+  background: var(--clr-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.card:last-child {
+  margin-bottom: 0;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--clr-text);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Form ───────────────────────────────────── */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--clr-muted);
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--clr-border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: var(--clr-text);
+  background: var(--clr-bg);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--clr-primary);
+  box-shadow: 0 0 0 3px rgba(79,70,229,.15);
+  background: #fff;
+}
+
+.form-group input.invalid,
+.form-group select.invalid {
+  border-color: var(--clr-danger);
+  box-shadow: 0 0 0 3px rgba(239,68,68,.12);
+}
+
+.field-error {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--clr-danger);
+  margin-top: 4px;
+  min-height: 16px;
+}
+
+.btn-add {
+  width: 100%;
+  padding: 11px;
+  background: var(--clr-primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+  margin-top: 4px;
+}
+
+.btn-add:hover {
+  background: var(--clr-primary-h);
+  transform: translateY(-1px);
+}
+
+.btn-add:active {
+  transform: translateY(0);
+}
+
+/* ── Transaction count badge ────────────────── */
+.tx-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--clr-primary);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 999px;
+}
+
+/* ── Transaction list ───────────────────────── */
+.tx-list-wrapper {
+  position: relative;
+}
+
+.tx-list {
+  list-style: none;
+  max-height: 340px;
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--clr-border) transparent;
+}
+
+.tx-list::-webkit-scrollbar {
+  width: 5px;
+}
+.tx-list::-webkit-scrollbar-track { background: transparent; }
+.tx-list::-webkit-scrollbar-thumb {
+  background: var(--clr-border);
+  border-radius: 99px;
+}
+
+.tx-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background: var(--clr-bg);
+  transition: background var(--transition);
+  animation: slideIn 0.2s ease;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.tx-item:hover {
+  background: #e8edf5;
+}
+
+/* Category dot */
+.tx-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.tx-dot.Food      { background: var(--clr-food); }
+.tx-dot.Transport { background: var(--clr-transport); }
+.tx-dot.Fun       { background: var(--clr-fun); }
+
+.tx-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.tx-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tx-meta {
+  font-size: 0.75rem;
+  color: var(--clr-muted);
+  margin-top: 1px;
+}
+
+.tx-amount {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--clr-danger);
+  white-space: nowrap;
+}
+
+.btn-delete {
+  background: none;
+  border: none;
+  color: var(--clr-muted);
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 6px;
+  font-size: 1rem;
+  line-height: 1;
+  transition: color var(--transition), background var(--transition);
+  flex-shrink: 0;
+}
+
+.btn-delete:hover {
+  color: var(--clr-danger);
+  background: rgba(239,68,68,.1);
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  color: var(--clr-muted);
+  font-size: 0.88rem;
+  padding: 24px 0 8px;
+}
+
+/* ── Chart card ─────────────────────────────── */
+.chart-card {
+  position: sticky;
+  top: 24px;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.chart-empty {
+  text-align: center;
+  color: var(--clr-muted);
+  font-size: 0.88rem;
+  margin-top: 20px;
+}
